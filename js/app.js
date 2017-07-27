@@ -25,9 +25,9 @@ Vue.component('value-input', {
         updateValue: function(value){
             this.$emit('input',value)
         },
-        results: function(){
-             this.total =  Financial.Mortgage(this.principal, this.interestRate, this.numberOfMonths);
-        },
+        // results: function(){
+        //      this.total =  Financial.Mortgage(this.principal, this.interestRate, this.numberOfMonths);
+        // },
         // formatValue: function(){
         //     this.$refs.input.value = new Intl.NumberFormat('usd-USD', {style:'currency', currency:'USD'}).format(currencyValidator.format(this.value))
         //     },
@@ -65,7 +65,7 @@ Vue.component('value-dollar', {
         }
     },
     mounted: function(){
-            //this.formatValue();
+            // this.formatValue();
 
     },
     methods: {
@@ -77,9 +77,9 @@ Vue.component('value-dollar', {
             this.$emit('input',value)
 
         },
-        results: function(){
-             this.total =  Financial.Mortgage(this.principal, this.interestRate, this.numberOfMonths);
-        },
+        // results: function(){
+        //      this.total =  Financial.Mortgage(this.principal, this.interestRate, this.numberOfMonths);
+        // },
         formatValue: function(){
             this.$refs.input.value = new Intl.NumberFormat('usd-USD', {style:'currency', currency:'USD'}).format(currencyValidator.format(this.value))
             },
@@ -97,46 +97,44 @@ var vm = new Vue({
   el: '#calculator',
 
   data: {
-    houseValue: 0,
-    downpayment: {
-        percent: 20,
-        dollar: 0
-    },
+    houseValue: 1000000,
+    downpaymentPercent: 20,
+    downpaymentDollar: 0,
     interestRate: 20,
     numberOfYears: 30,
 
-
-
   },
-  watch: {
-    downpayment:{
-        percent: 'newPercent',
-        dollar: 'newDollar'
-        }
-    },
+
   computed: {
     numberOfMonths: function(){
       return this.numberOfYears * 12;
     },
+
     newDollar: function(){
-        var percent = this.downpayment.percent;
-        return (percent / 100) * this.houseValue;
+        var percent = this.downpaymentPercent;
+        var newdollar= (percent / 100) * this.houseValue;
+        return newdollar;
     },
     newPercent: function(){
-        var dollar = this.downpayment.dollar;
-        return (dollar / this.houseValue) * 100;
+        var dollar = this.downpaymentDollar;
+        var newpercent = (dollar / this.houseValue) * 100;
+        return newpercent;
     },
 
     principal: function(){
-        var dollar = this.downpayment.dollar;
-
+        var dollar = this.downpaymentDollar;
             return this.houseValue - dollar;
 
     },
 
-    total: function(){
-        var calculate =  Financial.Mortgage(this.principal, this.interestRate, this.numberOfMonths);
-        return this.total = new Intl.NumberFormat('usd-USD', {style: 'currency', currency:'USD'}).format(Math.round(calculate * 100)/ 100);
+    total: {
+        get: function(){
+            var calculate =  Financial.Mortgage(this.principal, this.interestRate, this.numberOfMonths);
+            return this.total = new Intl.NumberFormat('usd-USD', {style: 'currency', currency:'USD'}).format(Math.round(calculate * 100)/ 100);
+        },
+        set: function(){
+
+        }
 
     }
 

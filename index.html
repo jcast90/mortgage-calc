@@ -11,9 +11,8 @@
     <div id="calculator">
         <value-dollar label="House Value" v-model.number="houseValue"></value-dollar>
         <h3>downpayment</h3>
-        <value-dollar label="$" v-model.number="downpayment.dollar" :value="newDollar"></value-dollar>
-        <value-input label="%" v-model.number="downpayment.percent" :value="newPercent"></value-input>
-
+        <value-dollar label="$" v-model.number="downpaymentDollar" :value="downpaymentDollar=newDollar" v-on:input="downpaymentPercent = newPercent"></value-dollar>
+        <value-input label="%" v-model.number="downpaymentPercent" v-on:input="downpaymentDollar = newDollar" ></value-input>
         <value-input label="Interest Rate" v-model.number="interestRate"></value-input>
         <value-input label="Number of Years" v-model.number="numberOfYears"></value-input>
         <input type="text" :value="total">
