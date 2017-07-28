@@ -4,26 +4,30 @@
     <meta charset="utf-8">
     <title> Mortgage Calculator </title>
     <link rel="stylesheet" href="main.css">
+    <style>
+            .notValid{
+                background-color: red;
+                border: 1px solid red;
+            }
+    </style>
 </head>
 
 <body>
 
-    <div id="calculator">
-        <value-dollar label="House Value" v-model.number="houseValue"></value-dollar>
+    <div class="calculator-wrapper" id="calculator">
+        <value-dollar class="houseValue" label="House Value" v-model.number="houseValue" ></value-dollar>
         <h3>downpayment</h3>
-        <value-dollar label="$" v-model.number="downpaymentDollar" :value="downpaymentDollar=newDollar" v-on:input="downpaymentPercent = newPercent"></value-dollar>
-        <value-input label="%" v-model.number="downpaymentPercent" v-on:input="downpaymentDollar = newDollar" ></value-input>
-        <value-input label="Interest Rate" v-model.number="interestRate"></value-input>
-        <value-input label="Number of Years" v-model.number="numberOfYears"></value-input>
-        <input type="text" :value="total">
-        <p>Total: {{ total }}</p>
+        <value-dollar class="downpaymentDollar"  label="$" v-model.number="downpaymentDollar"  :value="downpaymentDollar=newDollar" v-on:input="downpaymentPercent = newPercent"></value-dollar>
+        <value-input class="downpaymentPercent" label="%" v-model.number="downpaymentPercent"  v-on:input="downpaymentDollar = newDollar" ></value-input>
+        <value-input class="interestRate" label="Interest Rate" v-model.number="interestRate" ></value-input>
+        <value-input class="numberOfYears" label="Number of Years" v-model.number="numberOfYears"></value-input>
+        <p class="total">Total: {{ total }}</p>
     </div>
 
 
 
     <script src="https://unpkg.com/vue"></script>
     <script type="text/javascript" src="js/financial.js"></script>
-    <!-- <script src="https://cdn.rawgit.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e/raw/974aa47f8f9c5361c5233bd56be37db8ed765a09/currency-validator.js"></script> -->
     <script type="text/javascript" src="js/app.js"></script>
 </body>
 
